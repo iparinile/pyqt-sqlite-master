@@ -1,8 +1,6 @@
 import sys  # sys нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets
-from PyQt5.QtSql import QSqlDatabase, QSqlQueryModel, QSqlTableModel
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 
 import design  # Это наш конвертированный файл дизайна
 
@@ -16,14 +14,22 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         db = QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName('data.db')
         db.open()
-
         self.model = QSqlTableModel(self)
-        self.model.setTable('Товары')
+        self.model.setTable(db.tables()[0])
         self.model.setEditStrategy(QSqlTableModel.OnFieldChange)
         self.tableView.setModel(self.model)
         self.model.select()
         self.tableView.setSortingEnabled(True)
-        self.pushButton.clicked.connect(self.delRow)
+        self.add_row.clicked.connect(self.addRow)
+        self.del_row.clicked.connect(self.delRow)
+
+        self.select_table.addItems(db.tables())
+        self.select_table.currentTextChanged.connect(self.update_current_table)
+
+    def update_current_table(self):
+        print(self.select_table.currentText())
+        self.model.setTable(self.select_table.currentText())
+        self.model.select()
 
     def addRow(self):
         self.model.insertRow(self.model.rowCount())
@@ -31,19 +37,6 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def delRow(self):
         self.model.removeRow(self.tableView.currentIndex().row())
         self.model.select()
-    #     self.model = QStandardItemModel()
-    #     self.tableView = QTableView()
-    #     self.tableView.setModel(self.model)
-    #     self.pushButton.clicked.connect(self.load_data)
-    #
-    # def load_data(self):
-    #     l = [[i + j for i in range(3)] for j in range(4)]
-    #     self.model.setRowCount(4)
-    #     self.model.setColumnCount(3)
-    #     for i in range(4):
-    #         for j in range(3):
-    #             item = QStandardItem(str(l[i][j]))
-    #             self.model.setItem(i, j, item)
 
 
 def main():
