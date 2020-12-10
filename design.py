@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'untitled.ui'
+# Form implementation generated from reading ui file 'design.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.1
 #
@@ -18,7 +18,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tableView = QtWidgets.QTableView(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(10, 100, 541, 301))
+        self.tableView.setGeometry(QtCore.QRect(10, 100, 561, 301))
         self.tableView.setObjectName("tableView")
         self.del_row = QtWidgets.QPushButton(self.centralwidget)
         self.del_row.setGeometry(QtCore.QRect(170, 420, 161, 41))
@@ -44,11 +44,13 @@ class Ui_MainWindow(object):
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(180, 50, 51, 16))
         self.label_3.setObjectName("label_3")
+        self.button_apply_filter = QtWidgets.QPushButton(self.centralwidget)
+        self.button_apply_filter.setGeometry(QtCore.QRect(420, 50, 75, 23))
+        self.button_apply_filter.setObjectName("button_apply_filter")
+        self.button_cancel_filter = QtWidgets.QPushButton(self.centralwidget)
+        self.button_cancel_filter.setGeometry(QtCore.QRect(500, 50, 75, 23))
+        self.button_cancel_filter.setObjectName("button_cancel_filter")
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 579, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -64,3 +66,5 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Выберите таблицу"))
         self.label_2.setText(_translate("MainWindow", "Фильтр"))
         self.label_3.setText(_translate("MainWindow", "По полю:"))
+        self.button_apply_filter.setText(_translate("MainWindow", "Применить"))
+        self.button_cancel_filter.setText(_translate("MainWindow", "Отменить"))

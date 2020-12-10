@@ -1,5 +1,5 @@
 import sys  # sys нужен для передачи argv в QApplication
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtSql import QSqlDatabase, QSqlTableModel
 
 import design  # Это наш конвертированный файл дизайна
@@ -22,13 +22,37 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.tableView.setSortingEnabled(True)
         self.add_row.clicked.connect(self.addRow)
         self.del_row.clicked.connect(self.delRow)
-
+        # Выбор таблицы для вывода:
         self.select_table.addItems(db.tables())
         self.select_table.currentTextChanged.connect(self.update_current_table)
+        # Выбор таблицы для фильтра:
+        columns = []
+        for i in range(self.model.record().count()):
+            columns.append(self.model.headerData(i, QtCore.Qt.Horizontal))
+        self.filter_col.addItems(columns)
+        # Обработка фильтров:
+        self.button_apply_filter.clicked.connect(self.apply_filter)
+        self.button_cancel_filter.clicked.connect(self.cancel_filter)
+
+    def get_name_columns(self):
+        columns = []
+        for i in range(self.model.record().count()):
+            columns.append(self.model.headerData(i, QtCore.Qt.Horizontal))
+        return columns
+
+    def apply_filter(self):
+        self.model.setFilter(f"{self.filter_col.currentText()}='{self.filter_arg.displayText()}'")
+
+    def cancel_filter(self):
+        self.model.setFilter("")
 
     def update_current_table(self):
-        print(self.select_table.currentText())
         self.model.setTable(self.select_table.currentText())
+        self.filter_col.clear()
+        columns = []
+        for i in range(self.model.record().count()):
+            columns.append(self.model.headerData(i, QtCore.Qt.Horizontal))
+        self.filter_col.addItems(columns)
         self.model.select()
 
     def addRow(self):

@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>100</y>
-      <width>541</width>
+      <width>561</width>
       <height>301</height>
      </rect>
     </property>
@@ -119,16 +119,32 @@
      <string>По полю:</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>579</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <widget class="QPushButton" name="button_apply_filter">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>50</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Применить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_cancel_filter">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>50</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Отменить</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
