@@ -41,7 +41,7 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
         return columns
 
     def apply_filter(self):
-        self.model.setFilter(f"{self.filter_col.currentText()}='{self.filter_arg.displayText()}'")
+        self.model.setFilter(f"{self.filter_col.currentText()} LIKE '{self.filter_arg.displayText()}'")
 
     def cancel_filter(self):
         self.model.setFilter("")
