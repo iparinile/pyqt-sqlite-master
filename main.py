@@ -56,7 +56,7 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
                     print('Возникла ошибка')
             except ValueError:
                 pass
-            self.model.setFilter(f"{self.filter_col.currentText()} LIKE '{self.filter_arg.displayText()}'")
+                self.model.setFilter(f"{self.filter_col.currentText()} LIKE '{self.filter_arg.displayText()}'")
 
     def cancel_filter(self):
         self.model.setFilter("")
