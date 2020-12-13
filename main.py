@@ -51,11 +51,9 @@ class ExampleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 select_filter = int(select_filter[1:])
                 if symbol == '=' or symbol == '<' or symbol == '>':
                     self.model.setFilter(f"{self.filter_col.currentText()} {symbol} {select_filter}")
-                    print(self.model.filter())
                 else:
                     print('Возникла ошибка')
             except ValueError:
-                pass
                 self.model.setFilter(f"{self.filter_col.currentText()} LIKE '{self.filter_arg.displayText()}'")
 
     def cancel_filter(self):
